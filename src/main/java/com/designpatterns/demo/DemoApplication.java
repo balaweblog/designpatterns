@@ -3,6 +3,8 @@ package com.designpatterns.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.designpatterns.demo.creational.builder.Customer;
+import com.designpatterns.demo.creational.builder.Loan;
+import com.designpatterns.demo.creational.builder.LoanBuilder;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -19,6 +21,23 @@ public class DemoApplication {
 
 		Customer Customer2 = new Customer("test", "test", "test", 10);
 		System.out.println(Customer2.firstName + " " + Customer2.lastname + " " + Customer2.age + " " + Customer2.middleName);
+
+
+
+		// after design patterns
+
+		Loan loan = new LoanBuilder().firstName("BALA").build();
+		System.out.println(loan.toString());
+
+		loan.setBranch("chennai");
+
+		System.out.println(loan.toString());
+
+		loan.setFirstName("balamurugan");
+		loan.setCommunicationaddress("address 1");
+		loan.setLoanamount(2000);
+		System.out.println(loan.toString());
+		
 
 	}
 
