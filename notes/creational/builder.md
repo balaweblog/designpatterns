@@ -5,9 +5,11 @@ Solution - The Builder pattern suggests that you extract the object construction
 
 Existing Implementation in JDK - 
 
-StringBuilder builder = new StringBuilder("Temp");
+                    StringBuilder builder = new StringBuilder("Temp");
 
-String data = builder.append(1)
-		.append(true)
-		.append("friend")
-		.toString();
+                    String data = builder.append(1)
+                            .append(true)
+                            .append("friend")
+                            .toString();
+
+Benefits - Design Flexiblity and Better Code readablity 
