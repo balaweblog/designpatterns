@@ -2,9 +2,13 @@ package com.designpatterns.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.validation.DataBinder;
+
 import com.designpatterns.demo.creational.builder.Customer;
 import com.designpatterns.demo.creational.builder.Loan;
 import com.designpatterns.demo.creational.builder.LoanBuilder;
+import com.designpatterns.demo.creational.singleton.DBProperties;
+import com.designpatterns.demo.creational.singleton.DBPropertiesNew;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -12,6 +16,8 @@ public class DemoApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(DemoApplication.class, args);
+
+		// 1. Builder Pattern 
 
 		// before design patterns
 		Customer customer = new Customer("balamurugan", "Bala");
@@ -37,6 +43,25 @@ public class DemoApplication {
 		loan.setCommunicationaddress("address 1");
 		loan.setLoanamount(2000);
 		System.out.println(loan.toString());
+
+
+		// Singleton pattern 
+
+
+		// before design pattern
+		DBProperties prop = new DBProperties();
+		System.out.println(prop.hashCode());
+
+		DBProperties prop1= new DBProperties();
+		System.out.println(prop1.hashCode());
+
+		// after design pattern
+		DBPropertiesNew prop2 = DBPropertiesNew.getConnection();
+		System.out.println(prop2.hashCode());
+			DBPropertiesNew prop3 = DBPropertiesNew.getConnection();
+		System.out.println(prop3.hashCode());
+
+
 		
 
 	}
