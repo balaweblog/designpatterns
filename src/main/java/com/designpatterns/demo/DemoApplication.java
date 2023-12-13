@@ -15,6 +15,7 @@ import com.designpatterns.demo.structural.adapter.AppletoAndroidAdapter;
 import com.designpatterns.demo.structural.adapter.IAndroidCharger;
 import com.designpatterns.demo.structural.adapter.IAppleCharger;
 
+
 @SpringBootApplication
 public class DemoApplication {
 
