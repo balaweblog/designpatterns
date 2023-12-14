@@ -15,5 +15,3 @@ Benefits -
 1. It allows one or more previsouly incompatible objects to interact
 2. It allows reusablity of existing functionality and flexiblity 
 
-
-https://www.youtube.com/watch?v=eR22JuwTa54

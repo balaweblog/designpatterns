@@ -9,12 +9,11 @@ import com.designpatterns.demo.creational.builder.LoanBuilder;
 import com.designpatterns.demo.creational.singleton.DBProperties;
 import com.designpatterns.demo.creational.singleton.DBPropertiesNew;
 
-import com.designpatterns.demo.structural.adapter.IPhone;
-import com.designpatterns.demo.structural.adapter.Android;
-import com.designpatterns.demo.structural.adapter.AppletoAndroidAdapter;
-import com.designpatterns.demo.structural.adapter.IAndroidCharger;
-import com.designpatterns.demo.structural.adapter.IAppleCharger;
-
+import com.designpatterns.demo.structural.adapter.TextCSVFormatter;
+import com.designpatterns.demo.structural.adapter.INewLineFormat;
+import com.designpatterns.demo.structural.adapter.TextNewLineFormatter;
+import com.designpatterns.demo.structural.adapter.TexttoCSVAdapter;
+import com.designpatterns.demo.structural.adapter.ICSVFormat;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -65,26 +64,24 @@ public class DemoApplication {
 		System.out.println(prop3.hashCode());
 
 		// adapter design pattern
-		IAndroidCharger android = new Android();
-		IAppleCharger iphone = new IPhone();
-
-		// direct calls
-		System.out.println("Phone 1 Recharging iPhone with Lightning");
-		iphone.useLightning();
-		iphone.charge();
-		System.out.println();
-
-		System.out.println("Phone 2 Recharging android with MicroUSB");
-		android.useMicroUsb();
-		android.charge();
-		System.out.println();
 
 		// adapter calls
-		System.out.println("Phone 3 Recharging iPhone with MicroUsb");
-		IAndroidCharger adapter = new AppletoAndroidAdapter(iphone);
-		adapter.useMicroUsb();
-		adapter.charge();
-		System.out.println();
+
+		String testString = " Formatting line 1. Formatting line 2. Formatting line 3.";
+		// convert text to new line 
+		INewLineFormat newLineFormatter = new TextNewLineFormatter();
+		String resultString = newLineFormatter.formatText(testString);
+		System.out.println(resultString);
+
+		// convert text to csv
+		ICSVFormat csvFormatter = new TextCSVFormatter();
+		String resultSTring1 = csvFormatter.formatCsvText(testString);
+		System.out.println(resultSTring1);
+
+		// CsvFormatter class overrides to return a string formatted as comma separated values.
+		INewLineFormat csvAdapter=new TexttoCSVAdapter(csvFormatter);
+		String resultCsvString=csvAdapter.formatText(testString);
+		System.out.println(resultCsvString);
 
 	}
 
