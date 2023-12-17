@@ -9,11 +9,16 @@ import com.designpatterns.demo.creational.builder.LoanBuilder;
 import com.designpatterns.demo.creational.singleton.DBProperties;
 import com.designpatterns.demo.creational.singleton.DBPropertiesNew;
 
-import com.designpatterns.demo.structural.adapter.TextCSVFormatter;
-import com.designpatterns.demo.structural.adapter.INewLineFormat;
-import com.designpatterns.demo.structural.adapter.TextNewLineFormatter;
-import com.designpatterns.demo.structural.adapter.TexttoCSVAdapter;
-import com.designpatterns.demo.structural.adapter.ICSVFormat;
+import com.designpatterns.demo.structural.adapter.OldSystem;
+import com.designpatterns.demo.structural.adapter.INewSystem;
+import com.designpatterns.demo.structural.adapter.NewSystem;
+import com.designpatterns.demo.structural.adapter.OldSystemAdapter;
+import com.designpatterns.demo.structural.adapter2.IJDBC;
+import com.designpatterns.demo.structural.adapter2.IJPA;
+import com.designpatterns.demo.structural.adapter2.JDBC;
+import com.designpatterns.demo.structural.adapter2.JDBCAdapter;
+import com.designpatterns.demo.structural.adapter2.JPA;
+import com.designpatterns.demo.structural.adapter.IOldSystem;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -67,21 +72,25 @@ public class DemoApplication {
 
 		// adapter calls
 
-		String testString = " Formatting line 1. Formatting line 2. Formatting line 3.";
-		// convert text to new line 
-		INewLineFormat newLineFormatter = new TextNewLineFormatter();
-		String resultString = newLineFormatter.formatText(testString);
-		System.out.println(resultString);
+		OldSystem oldSystem = new OldSystem();
+		oldSystem.doSomethingOld();
 
-		// convert text to csv
-		ICSVFormat csvFormatter = new TextCSVFormatter();
-		String resultSTring1 = csvFormatter.formatCsvText(testString);
-		System.out.println(resultSTring1);
+		NewSystem newSystem = new NewSystem();
+		newSystem.dosomethingnew();
 
-		// CsvFormatter class overrides to return a string formatted as comma separated values.
-		INewLineFormat csvAdapter=new TexttoCSVAdapter(csvFormatter);
-		String resultCsvString=csvAdapter.formatText(testString);
-		System.out.println(resultCsvString);
+		//OldSystemAdapter acts as a bridge between the old and new systems, allowing the OldSystem class to work with the NewSystem interface
+		OldSystemAdapter ods = new OldSystemAdapter(oldSystem);
+		ods.dosomethingnew();
+
+
+		IJDBC jdbc = new JDBC();
+		jdbc.executeJDBCQuery("test jdbc");
+
+		IJPA jpa = new JPA();
+		jpa.executeJPAQuery("test jpa");
+
+		JDBCAdapter jdbcjpa = new JDBCAdapter(jdbc);
+		jdbcjpa.executeJPAQuery("new test jpa query");
 
 	}
 
